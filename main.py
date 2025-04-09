@@ -28,23 +28,23 @@ def draw_rectangle2(screen, color, x, y, height, width, thickness):
 
 
 def main():
+    # BOTH
+    width = 50
+    height = 50
+    speed_x = 10
+    speed_y = 5
+    
+    # RED
     x = 100
     y = 100
 
-    width = 50
-    height = 50
-    speed_x = 5
-    speed_y = 5
     positive_x = True
     positive_y = True
 
+    # YELLOW
     x2 = 700
     y2 = 500
 
-    width2 = 50
-    height2 = 50
-    speed_x2 = 5
-    speed_y2 = 5
     positive_x2 = False
     positive_y2 = False
 
@@ -58,7 +58,7 @@ def main():
           # Use color from config
         
         # Draw on the screen
-        screen.fill(colors.WEIRDLY_SATURATED_SKY_BLUE)
+        #screen.fill(colors.WEIRDLY_SATURATED_SKY_BLUE)
 
         if x >= 749:
             positive_x = False
@@ -91,19 +91,19 @@ def main():
             positive_y2 = True
         
         if positive_x2:
-            x2 += speed_x2
+            x2 += speed_x
         else:
-            x2 -= speed_x2
+            x2 -= speed_x
 
         if positive_y2:
-            y2 += speed_y2
+            y2 += speed_y
         else:
-            y2 -= speed_y2
+            y2 -= speed_y
 
         draw_rectangle(screen, colors.ARTIFICIAL_BANANA_YELLOW, x, y, height, width, 0)
         draw_rectangle(screen, colors.BLACK, x, y, height, width, 5)
-        draw_rectangle2(screen, colors.YOUTUBE_AD_RED, x2, y2, height2, width2, 0)
-        draw_rectangle2(screen, colors.BLACK, x2, y2, height2, width2, 5)
+        draw_rectangle2(screen, colors.YOUTUBE_AD_RED, x2, y2, height, width, 0)
+        draw_rectangle2(screen, colors.BLACK, x2, y2, height, width, 5)
         pygame.display.flip()
         # Limit frame rate to certain number of frames per second (FPS)
         clock.tick(config.FPS)
