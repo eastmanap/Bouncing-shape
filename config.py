@@ -10,6 +10,3 @@ TITLE = "Pygame TEMPLATE 2.0"
 
 # Frame rate (frames per second)
 FPS = 60
-
-SQUARE_WIDTH = 50
-SQUARE_HEIGHT = 50

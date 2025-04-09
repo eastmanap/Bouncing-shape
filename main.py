@@ -5,13 +5,6 @@ import sys
 import colors
 import config  # Import the config module
 
-square_color = colors.ROYAL_BLUE # (or whatever color you prefer)
-square_x = 10 # Starting x-coordinate for the square
-square_y = 20 # Starting y-coordinate for the square
-
-square_vel_x = 2 # Move square 5 pixels to right along x-axis
-square_vel_y = 2 # Move square 5 pixels down along y-axis
-
 def init_game():
     pygame.init()
     screen = pygame.display.set_mode((config.WINDOW_WIDTH, config.WINDOW_HEIGHT))  # Use constants from config
@@ -24,18 +17,40 @@ def handle_events(screen):
             return False
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
-                return False
-            elif event.key == pygame.K_SPACE:
-                
-                
-                pygame.display.flip()
+                return False           
     return True
 
+def draw_rectangle(screen, color, x, y, height, width, thickness):
+            pygame.draw.rect(screen, color, (x, y, height, width), thickness)
+
+def draw_rectangle2(screen, color, x, y, height, width, thickness):
+            pygame.draw.rect(screen, color, (x, y, height, width), thickness)
+
+
 def main():
-    global square_x, square_y, square_vel_x, square_vel_y   
+    x = 100
+    y = 100
+
+    width = 50
+    height = 50
+    speed_x = 5
+    speed_y = 5
+    positive_x = True
+    positive_y = True
+
+    x2 = 700
+    y2 = 500
+
+    width2 = 50
+    height2 = 50
+    speed_x2 = 5
+    speed_y2 = 5
+    positive_x2 = False
+    positive_y2 = False
+
     screen = init_game()
     clock = pygame.time.Clock() # Initialize the clock object
-    screen.fill(colors.WHITE)
+    screen.fill(colors.WEIRDLY_SATURATED_SKY_BLUE)
     pygame.display.flip()
     running = True
     while running:
@@ -43,39 +58,53 @@ def main():
           # Use color from config
         
         # Draw on the screen
-        screen.fill(colors.WHITE)
-        text_colors = [colors.BLUE, colors.RED, colors.GREEN, colors.BLACK, colors.PURPLE]
-        text_options = ['Apollos', 'Web & App', 'Hello!']
-        text_fonts = [
-            pygame.font.Font('FreeMono.ttf', 25),
-            pygame.font.Font('DejaVuSans.ttf', 25)
-            ]
-                     
-        y = 50
-        for text in text_options:
-            font = text_fonts[random.randint(0,1)]
-                
-            if random.randint(0, 1) == 1:
-                font.set_bold(True)
-            else:
-                font.set_bold(False)
+        screen.fill(colors.WEIRDLY_SATURATED_SKY_BLUE)
 
-            if random.randint(0, 1) == 1:
-                font.set_italic(True)
-            else:
-                font.set_italic(False)
+        if x >= 749:
+            positive_x = False
+        if x <= 0:
+            positive_x = True
 
-            text_surface = font.render(text, True, text_colors[random.randint(0,4)])
-            screen.blit(text_surface, (50, y))
-            y += 50
-        def draw_rectangle(screen, color, x, y, height, width, thickness):
-            pygame.draw.rect(screen, color, (x, y, height, width), thickness)
+        if y >= 549:
+            positive_y = False
+        if y <= 0:
+            positive_y = True
+        
+        if positive_x:
+            x += speed_x
+        else:
+            x -= speed_x
 
-        draw_rectangle(screen, square_color, square_x, square_y, config.SQUARE_HEIGHT, config.SQUARE_WIDTH, 0)
+        if positive_y:
+            y += speed_y
+        else:
+            y -= speed_y
+
+        if x2 >= 749:
+            positive_x2 = False
+        if x2 <= 0:
+            positive_x2 = True
+
+        if y2 >= 549:
+            positive_y2 = False
+        if y2 <= 0:
+            positive_y2 = True
+        
+        if positive_x2:
+            x2 += speed_x2
+        else:
+            x2 -= speed_x2
+
+        if positive_y2:
+            y2 += speed_y2
+        else:
+            y2 -= speed_y2
+
+        draw_rectangle(screen, colors.ARTIFICIAL_BANANA_YELLOW, x, y, height, width, 0)
+        draw_rectangle(screen, colors.BLACK, x, y, height, width, 5)
+        draw_rectangle2(screen, colors.YOUTUBE_AD_RED, x2, y2, height2, width2, 0)
+        draw_rectangle2(screen, colors.BLACK, x2, y2, height2, width2, 5)
         pygame.display.flip()
-        # Update position of square on screen
-        square_x = square_x + square_vel_x
-        square_y = square_y + square_vel_y
         # Limit frame rate to certain number of frames per second (FPS)
         clock.tick(config.FPS)
 
